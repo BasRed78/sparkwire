@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sparkwire Netzbau | Glasfaser-Infrastruktur für Deutschland</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #FF4E00;
+            --orange-dark: #E64500;
+            --navy: #07094C;
+            --navy-light: #0D1166;
+            --charcoal: #222222;
+            --dolphin-grey: #666666;
+            --whisper-grey: #EAEAEA;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--charcoal);
+            line-height: 1.6;
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(7, 9, 76, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .logo-text .brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            color: var(--navy);
+        }
+
+        .logo-text .sub {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 14px;
+            color: var(--navy);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text .sub::after {
+            content: '.';
+            color: var(--orange);
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-size: 15px;
+            color: var(--navy);
+            text-decoration: none;
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--orange);
+            color: var(--white) !important;
+            padding: 12px 28px !important;
+            border-radius: 4px;
+            font-weight: 700 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 13px !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--orange-dark) !important;
+            color: var(--white) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 78, 0, 0.35);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, #141852 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 78, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 78, 0, 0.1) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        /* Animated spark patterns */
+        .hero-sparks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .spark {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--orange);
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkle 4s infinite;
+        }
+
+        .spark:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .spark:nth-child(2) { top: 60%; left: 85%; animation-delay: 0.8s; }
+        .spark:nth-child(3) { top: 40%; left: 70%; animation-delay: 1.6s; }
+        .spark:nth-child(4) { top: 80%; left: 30%; animation-delay: 2.4s; }
+        .spark:nth-child(5) { top: 15%; left: 60%; animation-delay: 3.2s; }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Grid pattern overlay */
+        .hero-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 40px 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-content {
+            color: var(--white);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 78, 0, 0.15);
+            border: 1px solid rgba(255, 78, 0, 0.3);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--orange);
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--orange);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 5vw, 64px);
+            font-weight: 700;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero h1 span {
+            color: var(--orange);
+        }
+
+        .hero-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            max-width: 500px;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: var(--white);
+            padding: 16px 36px;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--orange-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 78, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 16px 36px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+            background: rgba(255, 78, 0, 0.1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            position: relative;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 78, 0, 0.1);
+            border-color: rgba(255, 78, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--orange);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        /* ===== SERVICES SECTION ===== */
+        .services {
+            padding: 120px 40px;
+            background: var(--white);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--whisper-grey), transparent);
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--orange);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 4vw, 48px);
+            color: var(--navy);
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--dolphin-grey);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border: 1px solid var(--whisper-grey);
+            border-radius: 12px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--orange);
+            transition: height 0.4s ease;
+        }
+
+        .service-card:hover {
+            border-color: transparent;
+            box-shadow: 0 20px 60px rgba(7, 9, 76, 0.12);
+            transform: translateY(-8px);
+        }
+
+        .service-card:hover::before {
+            height: 100%;
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .service-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--white);
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+
+        .service-card p {
+            color: var(--dolphin-grey);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* ===== ABOUT / USP SECTION ===== */
+        .about {
+            padding: 120px 40px;
+            background: var(--navy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 78, 0, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .about-content {
+            color: var(--white);
+        }
+
+        .about .section-label {
+            color: var(--orange);
+        }
+
+        .about .section-title {
+            color: var(--white);
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .about-text {
+            font-size: 17px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .usp-list {
+            list-style: none;
+        }
+
+        .usp-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .usp-list li::before {
+            content: '';
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            background: var(--orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-top: 2px;
+        }
+
+        /* About Visual - Professional Stats */
+        .about-visual {
+            position: relative;
+        }
+
+        .about-stats-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+        }
+
+        .about-headline {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .about-headline-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 72px;
+            font-weight: 700;
+            color: var(--orange);
+            line-height: 1;
+        }
+
+        .about-headline-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--white);
+        }
+
+        .about-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 32px 0;
+        }
+
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .compliance-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .compliance-icon {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            background: rgba(255, 78, 0, 0.15);
+            border: 1px solid rgba(255, 78, 0, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .compliance-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--orange);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .compliance-text h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .compliance-text p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.4;
+        }
+
+        .parent-company {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .parent-logo {
+            width: 56px;
+            height: 56px;
+            background: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--navy);
+        }
+
+        .parent-info h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .parent-info p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ===== PROCESS SECTION ===== */
+        .process {
+            padding: 120px 40px;
+            background: var(--whisper-grey);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -15px;
+            width: 30px;
+            height: 2px;
+            background: var(--orange);
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border: 3px solid var(--orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            color: var(--orange);
+            margin: 0 auto 24px;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover .step-number {
+            background: var(--orange);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .process-step h3 {
+            font-size: 18px;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .process-step p {
+            font-size: 14px;
+            color: var(--dolphin-grey);
+            line-height: 1.6;
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact {
+            padding: 120px 40px;
+            background: var(--white);
+        }
+
+        .contact-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .contact-info h2 {
+            font-size: 40px;
+            color: var(--navy);
+            margin-bottom: 24px;
+        }
+
+        .contact-info p {
+            font-size: 17px;
+            color: var(--dolphin-grey);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .contact-details {
+            list-style: none;
+        }
+
+        .contact-details li {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: var(--charcoal);
+        }
+
+        .contact-details li svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--orange);
+        }
+
+        .contact-form {
+            background: var(--whisper-grey);
+            padding: 50px;
+            border-radius: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 15px;
+            background: var(--white);
+            color: var(--charcoal);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--orange);
+            box-shadow: 0 0 0 4px rgba(255, 78, 0, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            background: var(--orange);
+            color: var(--white);
+            padding: 18px 36px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 78, 0, 0.3);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 80px 40px 40px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 24px;
+        }
+
+        .footer-brand .logo-text .brand,
+        .footer-brand .logo-text .sub {
+            color: var(--white);
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+            color: var(--orange);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--orange);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px;
+        }
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-legal a {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal a:hover {
+            color: var(--orange);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-container,
+            .about-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-step::after {
+                display: none;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-container {
+                padding: 140px 24px 80px;
+            }
+
+            .services,
+            .about,
+            .process,
+            .contact {
+                padding: 80px 24px;
+            }
+
+            .services-grid,
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-visual {
+                grid-template-columns: 1fr;
+            }
+
+            .compliance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" rx="8" fill="#FF4E00"/>
+                    <path d="M50 10 L50 45 L85 50 L50 55 L50 90 L45 55 L10 50 L45 45 Z" fill="white"/>
+                </svg>
+                <span class="logo-text">
+                    <span class="brand">Sparkwire</span>
+                    <span class="sub">Netzbau</span>
+                </span>
+            </a>
+            <div class="nav-links">
+                <a href="#leistungen">Leistungen</a>
+                <a href="#ueber-uns">Über uns</a>
+                <a href="#prozess">Prozess</a>
+                <a href="#kontakt" class="nav-cta">Kontakt</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-sparks">
+            <div class="spark"></div>
+            <div class="spark"></div>
+            <div class="spark"></div>
+            <div class="spark"></div>
+            <div class="spark"></div>
+        </div>
+        <div class="hero-grid"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">Niederländische Präzision in Deutschland</div>
+                <h1>Glasfaser-<span>Infrastruktur</span> für Deutschland</h1>
+                <p class="hero-subtitle">Von der Straße bis zur Wohnung. Sparkwire Netzbau ist Ihr spezialisierter Partner für FttH-Aktivierung, HDD-Bohrungen und NE4-Installationen.</p>
+                <div class="hero-buttons">
+                    <a href="#kontakt" class="btn-primary">
+                        Projekt anfragen
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                    <a href="#leistungen" class="btn-secondary">Unsere Leistungen</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">130+</div>
+                            <div class="stat-label">Fachkräfte</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Störungsdienst</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">8+</div>
+                            <div class="stat-label">Jahre Erfahrung</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">NL→DE</div>
+                            <div class="stat-label">Expansion</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="leistungen">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Leistungen</span>
+                <h2 class="section-title">Spezialisiert auf Glasfaserinfrastruktur</h2>
+                <p class="section-subtitle">Von komplexen Tiefbauarbeiten bis zur Aktivierung in der Wohnung — wir schließen die Lücke zwischen "Homes Passed" und "Homes Activated".</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <h3>NE4-Aktivierung</h3>
+                    <p>Vom Hausübergabepunkt (HÜP) über das Treppenhaus bis zur Glasfaser-Teilnehmeranschlussdose (GF-TA). Wir aktivieren die "letzte Meile" in Mehrfamilienhäusern.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+                    </div>
+                    <h3>HDD-Bohrungen</h3>
+                    <p>Horizontal Directional Drilling für minimale Oberflächenstörung. Ideal für Stadtgebiete und schwieriges Gelände — unsere Spezialität aus den Niederlanden.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                    </div>
+                    <h3>Glasfaser-Spleißen</h3>
+                    <p>Präzises Fusionsspleißen durch zertifizierte Techniker. Wir gewährleisten optimale Signalübertragung und dokumentieren jeden Splice nach deutschen Standards.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm6-10H6V5h12v2z"/></svg>
+                    </div>
+                    <h3>Hochbau (MDU)</h3>
+                    <p>Spezialisiert auf Mehrfamilienhäuser: Steigleitungen, Brandschutzmaßnahmen, WEG-Koordination. Wo andere aufhören, fangen wir an.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    </div>
+                    <h3>24/7 Störungsdienst</h3>
+                    <p>Rund um die Uhr erreichbar für Notfälle. Schnelle Reaktionszeiten bei Grabenschäden und Netzwerkausfällen — auch nachts und am Wochenende.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    </div>
+                    <h3>DIN 18220 / ZTV</h3>
+                    <p>Beherrschung beider Standards: Moderne Trenching-Methoden (DIN 18220) und klassische Tiefbau (ZTV-TKNetz 48). Flexibel für jeden Auftraggeber.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="ueber-uns">
+        <div class="about-container">
+            <div class="about-content">
+                <span class="section-label">Über uns</span>
+                <h2 class="section-title">Niederländische Expertise, Deutsche Präzision</h2>
+                <p class="about-text">Sparkwire Netzbau ist das deutsche Tochterunternehmen von Van Uden Telecom B.V. — einem etablierten Glasfaser-Spezialisten mit über 130 Mitarbeitern und Standorten in Oss und Heerlen. Wir bringen acht Jahre Erfahrung aus dem niederländischen Markt nach Deutschland.</p>
+                <ul class="usp-list">
+                    <li>Spezialisiert auf die "Aktivierungslücke" — von Homes Passed zu Homes Activated</li>
+                    <li>Fokus auf komplexe Projekte: HDD, Hochbau, NE4-Installationen</li>
+                    <li>Vollständig Soka-Bau registriert und Handwerkskammer-konform</li>
+                    <li>24/7 Störungsdienst mit schnellen Reaktionszeiten</li>
+                    <li>Erfahrung mit Stadtwerken, AltNets und Hauptauftragnehmern</li>
+                </ul>
+            </div>
+            <div class="about-visual">
+                <div class="about-stats-card">
+                    <div class="about-headline">
+                        <span class="about-headline-number">130+</span>
+                        <span class="about-headline-text">Fachkräfte in<br>den Niederlanden</span>
+                    </div>
+                    
+                    <div class="compliance-grid">
+                        <div class="compliance-item">
+                            <div class="compliance-icon">
+                                <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="compliance-text">
+                                <h4>VCA** Zertifiziert</h4>
+                                <p>Höchste Sicherheitsstandards</p>
+                            </div>
+                        </div>
+                        <div class="compliance-item">
+                            <div class="compliance-icon">
+                                <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="compliance-text">
+                                <h4>Handwerkskammer</h4>
+                                <p>Offiziell eingetragen</p>
+                            </div>
+                        </div>
+                        <div class="compliance-item">
+                            <div class="compliance-icon">
+                                <svg viewBox="0 0 24 24"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="compliance-text">
+                                <h4>Soka-Bau</h4>
+                                <p>Registriert & konform</p>
+                            </div>
+                        </div>
+                        <div class="compliance-item">
+                            <div class="compliance-icon">
+                                <svg viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </div>
+                            <div class="compliance-text">
+                                <h4>Freistellungsbescheinigung</h4>
+                                <p>Steuerliche Compliance</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="parent-company">
+                        <div class="parent-logo">vU</div>
+                        <div class="parent-info">
+                            <h4>Van Uden Telecom B.V.</h4>
+                            <p>Muttergesellschaft · Oss & Heerlen, Niederlande</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="prozess">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-label">Prozess</span>
+                <h2 class="section-title">Wie wir arbeiten</h2>
+                <p class="section-subtitle">Von der ersten Anfrage bis zur Aktivierung — ein klarer, effizienter Prozess.</p>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Anfrage & Bedarfsanalyse</h3>
+                    <p>Sie beschreiben Ihr Projekt. Wir analysieren die Anforderungen und erstellen ein maßgeschneidertes Angebot.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Planung & Genehmigungen</h3>
+                    <p>Technische Planung, Koordination mit Behörden und Vorbereitung aller notwendigen Dokumentation.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Ausführung</h3>
+                    <p>Professionelle Umsetzung durch unsere zertifizierten Teams — termingerecht und qualitätsgesichert.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Abnahme & Übergabe</h3>
+                    <p>Vollständige Dokumentation, Qualitätsprüfung und saubere Übergabe an den Auftraggeber.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="kontakt">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Projekt starten</h2>
+                <p>Sie haben ein Glasfaserprojekt in Deutschland? Ob Stadtwerk, AltNet oder Hauptauftragnehmer — wir sind bereit für die Zusammenarbeit. Kontaktieren Sie uns für ein unverbindliches Gespräch.</p>
+                <ul class="contact-details">
+                    <li>
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="85ecebe3eac5f6f5e4f7eef2ecf7e0a8ebe0f1ffe7e4f0abe1e0">[email&#160;protected]</a>
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                        +49 (0) 123 456 7890
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        Nordrhein-Westfalen, Deutschland
+                    </li>
+                </ul>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="company">Unternehmen</label>
+                    <input type="text" id="company" name="company" placeholder="Ihr Unternehmen">
+                </div>
+                <div class="form-group">
+                    <label for="name">Ansprechpartner</label>
+                    <input type="text" id="name" name="name" placeholder="Ihr Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-Mail</label>
+                    <input type="email" id="email" name="email" placeholder="ihre@email.de">
+                </div>
+                <div class="form-group">
+                    <label for="project">Projektart</label>
+                    <select id="project" name="project">
+                        <option value="">Bitte auswählen...</option>
+                        <option value="ne4">NE4-Aktivierung</option>
+                        <option value="hdd">HDD-Bohrungen</option>
+                        <option value="mdu">Hochbau / MDU</option>
+                        <option value="splicing">Glasfaser-Spleißen</option>
+                        <option value="other">Sonstiges</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Projektbeschreibung</label>
+                    <textarea id="message" name="message" placeholder="Beschreiben Sie Ihr Projekt..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">Anfrage senden</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="100" height="100" rx="8" fill="#FF4E00"/>
+                            <path d="M50 10 L50 45 L85 50 L50 55 L50 90 L45 55 L10 50 L45 45 Z" fill="white"/>
+                        </svg>
+                        <span class="logo-text">
+                            <span class="brand">Sparkwire</span>
+                            <span class="sub">Netzbau</span>
+                        </span>
+                    </a>
+                    <p>Glasfaser-Infrastruktur für Deutschland. Niederländische Expertise, deutsche Präzision.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Leistungen</h4>
+                    <ul>
+                        <li><a href="#">NE4-Aktivierung</a></li>
+                        <li><a href="#">HDD-Bohrungen</a></li>
+                        <li><a href="#">Glasfaser-Spleißen</a></li>
+                        <li><a href="#">Hochbau / MDU</a></li>
+                        <li><a href="#">24/7 Störungsdienst</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Unternehmen</h4>
+                    <ul>
+                        <li><a href="#">Über uns</a></li>
+                        <li><a href="#">Karriere</a></li>
+                        <li><a href="#">Partner</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Rechtliches</h4>
+                    <ul>
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                        <li><a href="#">AGB</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Sparkwire Netzbau GmbH. Alle Rechte vorbehalten.</p>
+                <div class="footer-legal">
+                    <a href="#">Ein Unternehmen der Van Uden Telecom B.V.</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission (placeholder)
+        document.querySelector(

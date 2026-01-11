@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vU-Telecom | Glasvezel Infrastructuur Partner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Original vU-Telecom colors */
+            --purple-deep: #2D1B4E;
+            --purple-mid: #462B7C;
+            --purple-light: #6B4BA1;
+            --mint: #2EE6A8;
+            --mint-light: #5DFFC4;
+            --mint-dim: rgba(46, 230, 168, 0.12);
+            --cyan: #00D4FF;
+            
+            --white: #FFFFFF;
+            --gray-50: #F8F9FC;
+            --gray-100: #F1F3F8;
+            --gray-200: #E2E5EE;
+            --gray-400: #9299A8;
+            --gray-600: #5A6275;
+            --gray-800: #2A2F3C;
+            
+            --font-main: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Gradients matching original */
+            --gradient-hero: linear-gradient(135deg, #2D1B4E 0%, #462B7C 50%, #5A3D91 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--white);
+            color: var(--gray-800);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ========== UTILITY ========== */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 clamp(1.5rem, 4vw, 3rem);
+        }
+
+        /* ========== TOP BAR ========== */
+        .top-bar {
+            background: var(--purple-deep);
+            padding: 0.5rem 0;
+            font-size: 0.8125rem;
+        }
+
+        .top-bar__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar__left {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .top-bar__phone {
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .top-bar__phone:hover {
+            color: var(--mint);
+        }
+
+        .top-bar__status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--mint);
+        }
+
+        .top-bar__status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--mint);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .lang-switch {
+            display: flex;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .lang-switch a {
+            padding: 0.375rem 0.75rem;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .lang-switch a.active {
+            background: var(--white);
+            color: var(--purple-deep);
+        }
+
+        .lang-switch a:hover:not(.active) {
+            color: var(--white);
+        }
+
+        /* ========== NAVIGATION ========== */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            z-index: 100;
+            box-shadow: 0 2px 16px rgba(45, 27, 78, 0.06);
+        }
+
+        .nav__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.875rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo__mark {
+            width: 46px;
+            height: 46px;
+            position: relative;
+        }
+
+        .logo__mark img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Placeholder logo styling */
+        .logo__mark-placeholder {
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--purple-mid);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .logo__mark-placeholder::after {
+            content: 'vU';
+            font-family: var(--font-main);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--purple-mid);
+        }
+
+        .logo__text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo__name {
+            font-family: var(--font-main);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--purple-deep);
+            line-height: 1.1;
+        }
+
+        .logo__tagline {
+            font-size: 0.625rem;
+            color: var(--gray-400);
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .nav__links {
+            display: flex;
+            align-items: center;
+            gap: 0.125rem;
+            list-style: none;
+        }
+
+        .nav__links a {
+            padding: 0.5rem 0.875rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav__links a:hover,
+        .nav__links a.active {
+            color: var(--purple-mid);
+            background: var(--gray-50);
+        }
+
+        .nav__cta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6875rem 1.25rem;
+            font-family: var(--font-main);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .btn--primary {
+            background: var(--mint);
+            color: var(--purple-deep);
+        }
+
+        .btn--primary:hover {
+            background: var(--mint-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46, 230, 168, 0.25);
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: var(--purple-mid);
+            border: 2px solid var(--mint);
+        }
+
+        .btn--outline:hover {
+            background: var(--mint-dim);
+        }
+
+        .btn--ghost {
+            background: transparent;
+            color: var(--gray-600);
+            padding: 0.5rem 0.875rem;
+        }
+
+        .btn--ghost:hover {
+            color: var(--purple-mid);
+        }
+
+        .btn--white-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--mint);
+        }
+
+        .btn--white-outline:hover {
+            background: rgba(46, 230, 168, 0.15);
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            background: var(--gradient-hero);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero__bg-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: linear-gradient(to right, var(--purple-mid) 0%, transparent 20%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23462B7C" width="100" height="100"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        /* Network/circuit pattern overlay */
+        .hero__pattern {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v60M0 30h60M15 15l30 30M45 15L15 45' stroke='%23ffffff' stroke-opacity='0.03' stroke-width='1' fill='none'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .hero__glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(46, 230, 168, 0.12) 0%, transparent 70%);
+            top: -150px;
+            right: 10%;
+            pointer-events: none;
+        }
+
+        .hero__inner {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            padding: 5rem 0;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .hero__content {
+            max-width: 560px;
+        }
+
+        .hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 0.875rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50px;
+            font-size: 0.8125rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .hero__badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--mint);
+            border-radius: 50%;
+        }
+
+        .hero__title {
+            font-family: var(--font-main);
+            font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero__title span {
+            color: var(--mint);
+        }
+
+        .hero__description {
+            font-size: 1.0625rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .hero__cta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero__stats {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .hero__stat {
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .hero__stat::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            bottom: 4px;
+            width: 3px;
+            background: var(--mint);
+            border-radius: 2px;
+        }
+
+        .hero__stat-value {
+            font-family: var(--font-main);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .hero__stat-label {
+            font-size: 0.8125rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 0.25rem;
+        }
+
+        /* Hero Right - Momentum Cards */
+        .hero__momentum {
+            display: flex;
+            flex-direction: column;
+            gap: 0.875rem;
+        }
+
+        .momentum-card {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.25rem;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .momentum-card:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.15);
+            transform: translateX(6px);
+        }
+
+        .momentum-card--featured {
+            background: rgba(46, 230, 168, 0.1);
+            border-color: rgba(46, 230, 168, 0.25);
+        }
+
+        .momentum-card__header {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .momentum-card__tag {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: var(--mint);
+            background: rgba(46, 230, 168, 0.2);
+            padding: 0.1875rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .momentum-card__date {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .momentum-card__title {
+            font-family: var(--font-main);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--white);
+            line-height: 1.35;
+            margin-bottom: 0.375rem;
+        }
+
+        .momentum-card__text {
+            font-size: 0.8125rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.5;
+        }
+
+        .momentum-card__partner {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.875rem;
+            padding-top: 0.875rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .momentum-card__partner-logo {
+            width: 22px;
+            height: 22px;
+            background: var(--white);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.5625rem;
+            font-weight: 700;
+            color: var(--purple-deep);
+        }
+
+        .momentum-card__partner-name {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ========== PARTNERS TICKER ========== */
+        .partners-ticker {
+            background: var(--white);
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--gray-100);
+            overflow: hidden;
+        }
+
+        .partners-ticker__label {
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-400);
+            text-align: center;
+            margin-bottom: 0.875rem;
+        }
+
+        .partners-ticker__track {
+            display: flex;
+            animation: ticker 25s linear infinite;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .partners-ticker__item {
+            flex-shrink: 0;
+            padding: 0 2.5rem;
+            font-family: var(--font-main);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-200);
+            white-space: nowrap;
+            transition: color 0.2s;
+        }
+
+        .partners-ticker__track:hover .partners-ticker__item {
+            color: var(--gray-400);
+        }
+
+        /* ========== INTRO SECTION ========== */
+        .intro {
+            padding: 5rem 0;
+            background: var(--gray-50);
+        }
+
+        .intro__inner {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .intro__left {
+            position: sticky;
+            top: 100px;
+        }
+
+        .intro__eyebrow {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--purple-mid);
+            margin-bottom: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+        }
+
+        .intro__eyebrow::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: var(--mint);
+        }
+
+        .intro__title {
+            font-family: var(--font-main);
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--purple-deep);
+            margin-bottom: 1.25rem;
+        }
+
+        .intro__text {
+            font-size: 1rem;
+            color: var(--gray-600);
+            line-height: 1.75;
+        }
+
+        .intro__right {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .service-block {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1.25rem;
+            padding: 1.5rem;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .service-block:hover {
+            border-color: var(--purple-light);
+            box-shadow: 0 12px 32px rgba(45, 27, 78, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .service-block__number {
+            font-family: var(--font-main);
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--gray-200);
+            line-height: 1;
+            transition: color 0.3s;
+        }
+
+        .service-block:hover .service-block__number {
+            color: var(--mint);
+        }
+
+        .service-block__content h3 {
+            font-family: var(--font-main);
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--purple-deep);
+            margin-bottom: 0.375rem;
+        }
+
+        .service-block__content p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        .service-block__tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.375rem;
+            margin-top: 0.75rem;
+        }
+
+        .service-block__tag {
+            font-size: 0.6875rem;
+            font-weight: 500;
+            color: var(--purple-mid);
+            background: var(--mint-dim);
+            padding: 0.1875rem 0.625rem;
+            border-radius: 50px;
+        }
+
+        /* ========== PROOF SECTION ========== */
+        .proof {
+            background: var(--gradient-hero);
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .proof__bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.6;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(46, 230, 168, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 212, 255, 0.06) 0%, transparent 50%);
+        }
+
+        .proof__inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .proof__grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .proof__item {
+            text-align: center;
+            padding: 1.5rem 1rem;
+        }
+
+        .proof__value {
+            font-family: var(--font-main);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            color: var(--mint);
+            line-height: 1;
+            margin-bottom: 0.375rem;
+        }
+
+        .proof__label {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* ========== WHY SECTION ========== */
+        .why {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .why__header {
+            text-align: center;
+            max-width: 520px;
+            margin: 0 auto 3rem;
+        }
+
+        .why__eyebrow {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--purple-mid);
+            margin-bottom: 0.75rem;
+        }
+
+        .why__title {
+            font-family: var(--font-main);
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            font-weight: 700;
+            color: var(--purple-deep);
+        }
+
+        .why__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .why-card {
+            background: var(--gray-50);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .why-card:hover {
+            background: var(--white);
+            border-color: var(--gray-200);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(45, 27, 78, 0.08);
+        }
+
+        .why-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--mint) 0%, var(--cyan) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .why-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .why-card__icon {
+            width: 48px;
+            height: 48px;
+            background: var(--mint-dim);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .why-card__icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--purple-mid);
+        }
+
+        .why-card__title {
+            font-family: var(--font-main);
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--purple-deep);
+            margin-bottom: 0.5rem;
+        }
+
+        .why-card__text {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            line-height: 1.65;
+        }
+
+        /* ========== FOUNDER SECTION ========== */
+        .founder {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .founder__inner {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 3rem;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .founder__image-wrapper {
+            position: relative;
+        }
+
+        .founder__image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--white);
+            box-shadow: 0 8px 32px rgba(45, 27, 78, 0.12);
+            position: relative;
+            z-index: 1;
+        }
+
+        .founder__image-accent {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 2px solid var(--mint);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        .founder__content {
+            position: relative;
+        }
+
+        .founder__quote {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--gray-800);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .founder__quote::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            bottom: 0.25rem;
+            width: 4px;
+            background: linear-gradient(180deg, var(--mint) 0%, var(--purple-light) 100%);
+            border-radius: 2px;
+        }
+
+        .founder__attribution {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .founder__name {
+            font-family: var(--font-main);
+            font-weight: 600;
+            color: var(--purple-deep);
+            font-size: 1rem;
+        }
+
+        .founder__role {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        @media (max-width: 768px) {
+            .founder__inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .founder__image-wrapper {
+                margin: 0 auto;
+            }
+
+            .founder__image {
+                width: 140px;
+                height: 140px;
+            }
+
+            .founder__quote {
+                padding-left: 0;
+                padding-top: 1.5rem;
+            }
+
+            .founder__quote::before {
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60px;
+                height: 4px;
+                bottom: auto;
+            }
+
+            .founder__attribution {
+                justify-content: center;
+            }
+        }
+
+        /* ========== CTA SECTION ========== */
+        .cta {
+            padding: 5rem 0;
+            background: var(--gray-50);
+        }
+
+        .cta__inner {
+            background: var(--gradient-hero);
+            border-radius: 24px;
+            padding: 4rem;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta__glow {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(46, 230, 168, 0.15) 0%, transparent 70%);
+            top: -80px;
+            right: -80px;
+        }
+
+        .cta__content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta__title {
+            font-family: var(--font-main);
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.2;
+            margin-bottom: 0.875rem;
+        }
+
+        .cta__text {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 1.75rem;
+        }
+
+        .cta__buttons {
+            display: flex;
+            gap: 0.875rem;
+        }
+
+        .cta__contact {
+            position: relative;
+            z-index: 1;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            padding: 1.75rem;
+        }
+
+        .cta__contact-title {
+            font-size: 0.8125rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.75rem;
+        }
+
+        .cta__contact-phone {
+            font-family: var(--font-main);
+            font-size: 1.375rem;
+            font-weight: 600;
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.25rem;
+            transition: color 0.2s;
+        }
+
+        .cta__contact-phone:hover {
+            color: var(--mint);
+        }
+
+        .cta__contact-email {
+            font-size: 0.9375rem;
+            color: var(--mint);
+            text-decoration: none;
+        }
+
+        .cta__contact-locations {
+            margin-top: 1.25rem;
+            padding-top: 1.25rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .cta__location {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.5;
+        }
+
+        .cta__location strong {
+            color: var(--white);
+            display: block;
+            margin-bottom: 0.125rem;
+            font-weight: 600;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--purple-deep);
+            color: var(--white);
+            padding: 3.5rem 0 1.5rem;
+        }
+
+        .footer__inner {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer__brand {
+            max-width: 280px;
+        }
+
+        .footer__brand .logo__name {
+            color: var(--white);
+        }
+
+        .footer__brand .logo__tagline {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer__description {
+            margin-top: 1.25rem;
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.65;
+        }
+
+        .footer__certs {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.25rem;
+        }
+
+        .footer__cert {
+            padding: 0.3125rem 0.625rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            font-size: 0.6875rem;
+            font-weight: 600;
+        }
+
+        .footer__col h4 {
+            font-family: var(--font-main);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer__col ul {
+            list-style: none;
+        }
+
+        .footer__col li {
+            margin-bottom: 0.625rem;
+        }
+
+        .footer__col a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer__col a:hover {
+            color: var(--mint);
+        }
+
+        .footer__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .footer__links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer__links a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer__links a:hover {
+            color: var(--white);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .hero__inner {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                min-height: auto;
+                padding: 4rem 0;
+            }
+
+            .hero__momentum {
+                max-width: 500px;
+            }
+
+            .intro__inner {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .intro__left {
+                position: static;
+            }
+
+            .proof__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta__inner {
+                grid-template-columns: 1fr;
+                padding: 2.5rem;
+            }
+
+            .footer__inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar__status {
+                display: none;
+            }
+
+            .nav__links {
+                display: none;
+            }
+
+            .nav__cta .btn--ghost {
+                display: none;
+            }
+
+            .hero__stats {
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+
+            .hero__cta {
+                flex-direction: column;
+            }
+
+            .hero__cta .btn {
+                justify-content: center;
+            }
+
+            .proof__grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .proof__item {
+                padding: 1rem;
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer__bottom {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+
+            .cta__buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar__inner">
+            <div class="top-bar__left">
+                <a href="tel:+31850000000" class="top-bar__phone">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    +31 (0)85 000 0000
+                </a>
+                <span class="top-bar__status">24/7 Storingsdienst</span>
+            </div>
+            <div class="top-bar__right">
+                <div class="lang-switch">
+                    <a href="#" class="active">NL</a>
+                    <a href="#">DE</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav__inner">
+            <a href="#" class="logo">
+                <div class="logo__mark">
+                    <div class="logo__mark-placeholder"></div>
+                </div>
+                <div class="logo__text">
+                    <span class="logo__name">vU-Telecom</span>
+                    <span class="logo__tagline">Connecting the world</span>
+                </div>
+            </a>
+            <ul class="nav__links">
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Over ons</a></li>
+                <li><a href="#">Diensten</a></li>
+                <li><a href="#">Projecten</a></li>
+                <li><a href="#">Certificering</a></li>
+                <li><a href="#">Vacatures</a></li>
+                <li><a href="#">Sparkwire</a></li>
+            </ul>
+            <div class="nav__cta">
+                <a href="#" class="btn btn--ghost">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Capability Deck
+                </a>
+                <a href="#" class="btn btn--primary">Bespreek uw project</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero__pattern"></div>
+        <div class="hero__glow"></div>
+        
+        <div class="container hero__inner">
+            <div class="hero__content">
+                <div class="hero__badge">
+                    <span class="hero__badge-dot"></span>
+                    VCA** Gecertificeerd
+                </div>
+                <h1 class="hero__title">
+                    Uw partner voor <span>glasvezel infrastructuur</span>
+                </h1>
+                <p class="hero__description">
+                    Wij bouwen, beheren en onderhouden glasvezelnetwerken voor telecomaannemers en netwerkbeheerders. Van aanleg tot 24/7 storingsdienst.
+                </p>
+                <div class="hero__cta">
+                    <a href="#" class="btn btn--primary">
+                        Bespreek uw project
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="btn btn--white-outline">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        Bel direct
+                    </a>
+                </div>
+                <div class="hero__stats">
+                    <div class="hero__stat">
+                        <div class="hero__stat-value">[XXX]K+</div>
+                        <div class="hero__stat-label">Aansluitingen</div>
+                    </div>
+                    <div class="hero__stat">
+                        <div class="hero__stat-value">[X]+</div>
+                        <div class="hero__stat-label">Jaar ervaring</div>
+                    </div>
+                    <div class="hero__stat">
+                        <div class="hero__stat-value">24/7</div>
+                        <div class="hero__stat-label">Storingsdienst</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Momentum Cards -->
+            <div class="hero__momentum">
+                <div class="momentum-card momentum-card--featured">
+                    <div class="momentum-card__header">
+                        <span class="momentum-card__tag">Nieuw project</span>
+                        <span class="momentum-card__date">[Datum]</span>
+                    </div>
+                    <h3 class="momentum-card__title">[Headline: Recent project of grote opdracht]</h3>
+                    <p class="momentum-card__text">[Korte beschrijving van het project en wat vU-Telecom hiervoor doet]</p>
+                    <div class="momentum-card__partner">
+                        <div class="momentum-card__partner-logo">C</div>
+                        <span class="momentum-card__partner-name">In samenwerking met Circet</span>
+                    </div>
+                </div>
+
+                <div class="momentum-card">
+                    <div class="momentum-card__header">
+                        <span class="momentum-card__tag">Groei</span>
+                        <span class="momentum-card__date">[Datum]</span>
+                    </div>
+                    <h3 class="momentum-card__title">[Headline: Uitbreiding, nieuwe vestiging, of mijlpaal]</h3>
+                    <p class="momentum-card__text">[Kort nieuwtje over groei of ontwikkeling]</p>
+                </div>
+
+                <div class="momentum-card">
+                    <div class="momentum-card__header">
+                        <span class="momentum-card__tag">Sparkwire</span>
+                        <span class="momentum-card__date">Nieuw</span>
+                    </div>
+                    <h3 class="momentum-card__title">Nu ook actief in Duitsland</h3>
+                    <p class="momentum-card__text">Via onze dochteronderneming Sparkwire brengen we onze expertise naar de Duitse markt.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Ticker -->
+    <section class="partners-ticker">
+        <div class="partners-ticker__label">Wij werken samen met</div>
+        <div class="partners-ticker__track">
+            <span class="partners-ticker__item">Circet</span>
+            <span class="partners-ticker__item">Solutions30</span>
+            <span class="partners-ticker__item">De Leeuw PM</span>
+            <span class="partners-ticker__item">[Partner 4]</span>
+            <span class="partners-ticker__item">[Partner 5]</span>
+            <span class="partners-ticker__item">Circet</span>
+            <span class="partners-ticker__item">Solutions30</span>
+            <span class="partners-ticker__item">De Leeuw PM</span>
+            <span class="partners-ticker__item">[Partner 4]</span>
+            <span class="partners-ticker__item">[Partner 5]</span>
+        </div>
+    </section>
+
+    <!-- Intro / Services -->
+    <section class="intro">
+        <div class="container intro__inner">
+            <div class="intro__left">
+                <span class="intro__eyebrow">Wat wij doen</span>
+                <h2 class="intro__title">Complete glasvezel oplossingen van aanleg tot beheer</h2>
+                <p class="intro__text">
+                    Van Uden Telecom is gespecialiseerd in het volledige spectrum van glasvezel infrastructuur werkzaamheden. Wij werken als onderaannemer voor de grootste telecomaannemers van Nederland.
+                </p>
+            </div>
+            <div class="intro__right">
+                <div class="service-block">
+                    <span class="service-block__number">01</span>
+                    <div class="service-block__content">
+                        <h3>Netwerk Aanleg</h3>
+                        <p>Volledige aanleg van nieuwe glasvezelnetwerken voor laagbouw en hoogbouw, van planning tot oplevering.</p>
+                        <div class="service-block__tags">
+                            <span class="service-block__tag">HAS LB/HB</span>
+                            <span class="service-block__tag">Schouw</span>
+                            <span class="service-block__tag">Tuinboringen</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-block">
+                    <span class="service-block__number">02</span>
+                    <div class="service-block__content">
+                        <h3>Montage & Installatie</h3>
+                        <p>Professionele montage van aansluitpunten, distributiepunten en glasvezel blazen.</p>
+                        <div class="service-block__tags">
+                            <span class="service-block__tag">AP/DP Montage</span>
+                            <span class="service-block__tag">Blazen</span>
+                            <span class="service-block__tag">Splicing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-block">
+                    <span class="service-block__number">03</span>
+                    <div class="service-block__content">
+                        <h3>Beheer & Storingen</h3>
+                        <p>24/7 storingsdienst en volledig netwerkbeheer. Dag en nacht paraat.</p>
+                        <div class="service-block__tags">
+                            <span class="service-block__tag">24/7 Service</span>
+                            <span class="service-block__tag">Na-aansluitingen</span>
+                            <span class="service-block__tag">Overnames</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-block">
+                    <span class="service-block__number">04</span>
+                    <div class="service-block__content">
+                        <h3>Reconstructies</h3>
+                        <p>Aanpassen en upgraden van bestaande netwerken met focus op efficiëntie.</p>
+                        <div class="service-block__tags">
+                            <span class="service-block__tag">Upgrades</span>
+                            <span class="service-block__tag">Optimalisatie</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proof Stats -->
+    <section class="proof">
+        <div class="proof__bg"></div>
+        <div class="container proof__inner">
+            <div class="proof__grid">
+                <div class="proof__item">
+                    <div class="proof__value">[XXX]K+</div>
+                    <div class="proof__label">Aansluitingen gerealiseerd</div>
+                </div>
+                <div class="proof__item">
+                    <div class="proof__value">&lt;[X]u</div>
+                    <div class="proof__label">Gemiddelde responstijd</div>
+                </div>
+                <div class="proof__item">
+                    <div class="proof__value">[XX]+</div>
+                    <div class="proof__label">Vakmensen in dienst</div>
+                </div>
+                <div class="proof__item">
+                    <div class="proof__value">2</div>
+                    <div class="proof__label">Vestigingen</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why vU -->
+    <section class="why">
+        <div class="container">
+            <div class="why__header">
+                <span class="why__eyebrow">Waarom vU-Telecom</span>
+                <h2 class="why__title">Waar telecomaannemers ons op kiezen</h2>
+            </div>
+            <div class="why__grid">
+                <div class="why-card">
+                    <div class="why-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="why-card__title">VCA** Gecertificeerd</h3>
+                    <p class="why-card__text">Veiligheid staat voorop. Al onze medewerkers zijn volledig gecertificeerd en getraind volgens de hoogste veiligheidsnormen.</p>
+                </div>
+
+                <div class="why-card">
+                    <div class="why-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3 class="why-card__title">24/7 Beschikbaar</h3>
+                    <p class="why-card__text">Storingen wachten niet. Ons team staat dag en nacht paraat voor snelle respons en probleemoplossing.</p>
+                </div>
+
+                <div class="why-card">
+                    <div class="why-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3 class="why-card__title">Schaalbare capaciteit</h3>
+                    <p class="why-card__text">Van enkele aansluitingen tot grootschalige projecten – wij schalen mee met uw behoefte.</p>
+                </div>
+
+                <div class="why-card">
+                    <div class="why-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="why-card__title">Directe lijnen</h3>
+                    <p class="why-card__text">Korte communicatielijnen, één aanspreekpunt en snelle besluitvorming. Geen bureaucratie, wel resultaat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder -->
+    <section class="founder">
+        <div class="container">
+            <div class="founder__inner">
+                <div class="founder__image-wrapper">
+                    <div class="founder__image-accent"></div>
+                    <img src="bart-van-uden.webp" alt="Bart van Uden" class="founder__image">
+                </div>
+                <div class="founder__content">
+                    <blockquote class="founder__quote">
+                        [Persoonlijke boodschap van Bart over de visie van vU-Telecom, de waarden waar het bedrijf voor staat, of wat klanten van hen mogen verwachten. 2-3 zinnen die authenticiteit en betrouwbaarheid uitstralen.]
+                    </blockquote>
+                    <div class="founder__attribution">
+                        <span class="founder__name">Bart van Uden</span>
+                        <span class="founder__role">— Oprichter & Directeur</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta__inner">
+                <div class="cta__glow"></div>
+                <div class="cta__content">
+                    <h2 class="cta__title">Klaar om samen te werken?</h2>
+                    <p class="cta__text">Bespreek uw glasvezelproject met ons team. Wij denken graag met u mee over de beste aanpak.</p>
+                    <div class="cta__buttons">
+                        <a href="#" class="btn btn--primary">
+                            Bespreek uw project
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="btn btn--white-outline">
+                            Download Capability Deck
+                        </a>
+                    </div>
+                </div>
+                <div class="cta__contact">
+                    <div class="cta__contact-title">Direct contact</div>
+                    <a href="tel:+31850000000" class="cta__contact-phone">+31 (0)85 000 0000</a>
+                    <a href="/cdn-cgi/l/email-protection#244d4a424b6452510950414841474b490a4a48" class="cta__contact-email"><span class="__cf_email__" data-cfemail="3a53545c557a4c4f174e5f565f595557145456">[email&#160;protected]</span></a>
+                    <div class="cta__contact-locations">
+                        <div class="cta__location">
+                            <strong>Oss</strong>
+                            Romeinenweg 86b<br>
+                            5349 AL Oss
+                        </div>
+                        <div class="cta__location">
+                            <strong>Heerlen</strong>
+                            Snellius 1<br>
+                            6422 RM Heerlen
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__brand">
+                    <a href="#" class="logo">
+                        <div class="logo__mark">
+                            <div class="logo__mark-placeholder" style="border-color: rgba(255,255,255,0.3);">
+                            </div>
+                        </div>
+                        <div class="logo__text">
+                            <span class="logo__name">vU-Telecom</span>
+                            <span class="logo__tagline">Connecting the world</span>
+                        </div>
+                    </a>
+                    <p class="footer__description">Uw specialist in glasvezel infrastructuur. Van aanleg tot beheer, wij zijn uw betrouwbare partner.</p>
+                    <div class="footer__certs">
+                        <span class="footer__cert">VCA**</span>
+                        <span class="footer__cert">EBN</span>
+                    </div>
+                </div>
+
+                <div class="footer__col">
+                    <h4>Diensten</h4>
+                    <ul>
+                        <li><a href="#">Netwerk Aanleg</a></li>
+                        <li><a href="#">Montage AP/DP</a></li>
+                        <li><a href="#">Glasvezel Blazen</a></li>
+                        <li><a href="#">24/7 Storingsdienst</a></li>
+                        <li><a href="#">Reconstructies</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__col">
+                    <h4>Bedrijf</h4>
+                    <ul>
+                        <li><a href="#">Over ons</a></li>
+                        <li><a href="#">Projecten</a></li>
+                        <li><a href="#">Certificering</a></li>
+                        <li><a href="#">Vacatures</a></li>
+                        <li><a href="#">Sparkwire (DE)</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:+31850000000">+31 (0)85 000 0000</a></li>
+                        <li><a href="/cdn-cgi/l/email-protection#9df4f3fbf2ddebe8b0e9f8f1f8fef2f0b3f3f1"><span class="__cf_email__" data-cfemail="aac3c4ccc5eadcdf87decfc6cfc9c5c784c4c6">[email&#160;protected]</span></a></li>
+                        <li><a href="#">Oss (Hoofdkantoor)</a></li>
+                        <li><a href="#">Heerlen</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p>© 2026 van Uden Telecom B.V. Alle rechten voorbehouden.</p>
+  

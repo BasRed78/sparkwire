@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Van Uden Telecom — Een Verkenning | Red About Now</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #E63422;
+            --red-dark: #C92A1A;
+            --white: #FFFFFF;
+            --off-white: #F8F7F5;
+            --black: #1A1A1A;
+            --gray: #666666;
+            --gray-light: #999999;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', -apple-system, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(230, 52, 34, 0.98);
+            padding: 16px 48px;
+        }
+
+        nav.on-white {
+            background: var(--white);
+        }
+
+        nav.on-white .nav-logo,
+        nav.on-white .nav-links a {
+            color: var(--red);
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* ===== HERO - RED ===== */
+        .hero {
+            min-height: 100vh;
+            background: var(--red);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 48px 80px;
+            position: relative;
+        }
+
+        .hero-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--white);
+            opacity: 0.7;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 500;
+            color: var(--white);
+            line-height: 1.05;
+            max-width: 900px;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .hero-text {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--white);
+            opacity: 0.85;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 48px;
+            left: 48px;
+            font-size: 12px;
+            color: var(--white);
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        /* ===== SECTION - WHITE ===== */
+        .section-white {
+            background: var(--white);
+            padding: 120px 48px;
+        }
+
+        .section-white.alt {
+            background: var(--off-white);
+        }
+
+        /* ===== SECTION - RED ===== */
+        .section-red {
+            background: var(--red);
+            padding: 120px 48px;
+            color: var(--white);
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ===== SECTION HEADERS ===== */
+        .section-label {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            opacity: 0.6;
+        }
+
+        .section-red .section-label {
+            color: var(--white);
+        }
+
+        .section-title {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .section-title em {
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .section-red .section-subtitle {
+            color: var(--white);
+            opacity: 0.8;
+        }
+
+        /* ===== TWO COLUMN LAYOUT ===== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .two-col-wide {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        /* ===== HIGHLIGHTS ===== */
+        .highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .highlight-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .highlight-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--red);
+            min-width: 24px;
+        }
+
+        .section-red .highlight-number {
+            color: var(--white);
+            opacity: 0.5;
+        }
+
+        .highlight-content h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .highlight-content p {
+            font-size: 15px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .section-red .highlight-content p {
+            color: var(--white);
+            opacity: 0.75;
+        }
+
+        /* ===== STATS ===== */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 48px;
+            margin: 64px 0;
+        }
+
+        .stat-item {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--red);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .section-red .stat-number {
+            color: var(--white);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .section-red .stat-label {
+            color: var(--white);
+            opacity: 0.7;
+        }
+
+        /* ===== QUOTE ===== */
+        .quote-block {
+            margin: 64px 0;
+            padding-left: 32px;
+            border-left: 3px solid var(--red);
+        }
+
+        .quote-block p {
+            font-size: 24px;
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--black);
+        }
+
+        .section-red .quote-block {
+            border-left-color: var(--white);
+        }
+
+        .section-red .quote-block p {
+            color: var(--white);
+        }
+
+        /* ===== WEBSITE PREVIEW ===== */
+        .preview-wrapper {
+            margin: 64px 0;
+        }
+
+        .preview-label {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            color: var(--gray);
+        }
+
+        .preview-container {
+            background: var(--black);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+        }
+
+        .preview-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 20px;
+            background: #2A2A2A;
+        }
+
+        .preview-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .preview-dot.red { background: #FF5F56; }
+        .preview-dot.yellow { background: #FFBD2E; }
+        .preview-dot.green { background: #27CA40; }
+
+        .preview-url {
+            margin-left: 16px;
+            font-size: 13px;
+            color: var(--gray-light);
+        }
+
+        .preview-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            background: var(--white);
+        }
+
+        .preview-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .preview-comparison .preview-iframe {
+            height: 500px;
+        }
+
+        /* ===== DOWNLOAD BUTTON ===== */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--black);
+            color: var(--white);
+            padding: 18px 32px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-top: 32px;
+        }
+
+        .download-btn:hover {
+            background: var(--red);
+            transform: translateY(-2px);
+        }
+
+        .section-red .download-btn {
+            background: var(--white);
+            color: var(--red);
+        }
+
+        .section-red .download-btn:hover {
+            background: var(--off-white);
+        }
+
+        .download-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ===== CLOSING ===== */
+        .closing {
+            text-align: center;
+            padding: 160px 48px;
+            background: var(--off-white);
+        }
+
+        .closing h2 {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .closing p {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .closing .signature {
+            margin-top: 48px;
+            font-size: 16px;
+            color: var(--gray-light);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 48px;
+            background: var(--black);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--red);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-info {
+            font-size: 14px;
+            color: var(--gray-light);
+        }
+
+        .footer-info a {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .two-col,
+            .two-col-wide,
+            .preview-comparison {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero,
+            .section-white,
+            .section-red {
+                padding: 100px 24px 80px;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+
+            .preview-iframe {
+                height: 400px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="nav-logo">Red About Now</a>
+        <div class="nav-links">
+            <a href="#audit">Website</a>
+            <a href="#markt-nl">Markt NL</a>
+            <a href="#markt-de">Duitsland</a>
+            <a href="#sparkwire">Sparkwire</a>
+            <a href="#ai">AI</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-label">Eigen initiatief · Januari 2026</div>
+        <h1>Van Uden Telecom<br><em>— een verkenning</em></h1>
+        <p class="hero-text">Puur uit nieuwsgierigheid dook ik in de wereld van glasvezelinfrastructuur. Geen opdracht. Geen briefing. Gewoon de vraag: wat zou ik hiermee doen als het mijn bedrijf was?</p>
+        <p class="hero-text" style="margin-top: 24px; opacity: 0.7;">Gaandeweg zijn er diverse documenten te downloaden — neem vooral de tijd om ze door te lezen. Belangrijke caveat: alles is bekeken als buitenstaander, zonder toegang tot interne informatie. Er staan ongetwijfeld fouten en verkeerde aannames in. Maar het is ook bedoeld als thought starter, niet als eindconclusie.</p>
+        <div class="scroll-hint">Scroll</div>
+    </section>
+
+    <!-- Section 1: Website Audit -->
+    <section class="section-white" id="audit">
+        <div class="section-container">
+            <div class="two-col-wide">
+                <div>
+                    <div class="section-label">01 — Startpunt</div>
+                    <h2 class="section-title">De huidige <em>website</em></h2>
+                    <p class="section-subtitle">Ik begon met het bekijken van vu-telecom.nl. Functioneel, maar met ruimte voor verbetering.</p>
+                    
+                    <div class="highlights">
+                        <div class="highlight-item">
+                            <span class="highlight-number">01</span>
+                            <div class="highlight-content">
+                                <h4>Geen projectportfolio</h4>
+                                <p>LinkedIn toont mooie projecten (Utrecht Zuid PoP), maar de website laat ze niet zien.</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-number">02</span>
+                            <div class="highlight-content">
+                                <h4>USP's verdienen meer podium</h4>
+                                <p>24/7 storingsdienst, VCA**, 130 medewerkers — sterke punten die prominenter mogen.</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-number">03</span>
+                            <div class="highlight-content">
+                                <h4>Geen Duitse versie</h4>
+                                <p>Met Sparkwire-expansie naar Duitsland: Duitse opdrachtgevers doen hun huiswerk en vinden alleen een Nederlandse site.</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-number">04</span>
+                            <div class="highlight-content">
+                                <h4>Kleine technische issues</h4>
+                                <p>Typo in navigatie, contactformulier foutmelding, partner-logo's niet klikbaar.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="VU-Telecom-QuickScan-NL.pdf" class="download-btn" download>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                        Download Quick Scan
+                    </a>
+                </div>
+                <div></div>
+            </div>
+
+            <div class="preview-wrapper">
+                <div class="preview-comparison">
+                    <div>
+                        <div class="preview-label">Huidige website</div>
+                        <div class="preview-container">
+                            <div class="preview-header">
+                                <div class="preview-dot red"></div>
+                                <div class="preview-dot yellow"></div>
+                                <div class="preview-dot green"></div>
+                                <span class="preview-url">vu-telecom.nl</span>
+                            </div>
+                            <iframe src="https://www.vu-telecom.nl" class="preview-iframe" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="preview-label">Redesign concept</div>
+                        <div class="preview-container">
+                            <div class="preview-header">
+                                <div class="preview-dot red"></div>
+                                <div class="preview-dot yellow"></div>
+                                <div class="preview-dot green"></div>
+                                <span class="preview-url">concept</span>
+                            </div>
+                            <iframe src="vu-telecom-v3.html" class="preview-iframe" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Nederlandse Markt -->
+    <section class="section-red" id="markt-nl">
+        <div class="section-container">
+            <div class="section-label">02 — Context</div>
+            <h2 class="section-title">De Nederlandse <em>markt</em></h2>
+            <p class="section-subtitle">Wie zijn de spelers? Waar staat Van Uden? Dat leidde tot onderzoek naar concurrentie en marktstructuur.</p>
+
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-number">78%</div>
+                    <div class="stat-label">FttH dekking NL</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">Tier 3</div>
+                    <div class="stat-label">Marktpositie vU</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2020</div>
+                    <div class="stat-label">Oprichting</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">130+</div>
+                    <div class="stat-label">Medewerkers</div>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-number">01</span>
+                        <div class="highlight-content">
+                            <h4>Tier-structuur ontdekt</h4>
+                            <p>Tier 1 (VolkerWessels, BAM) zijn potentiële opdrachtgevers. Tier 2/3 zijn directe concurrenten.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-number">02</span>
+                        <div class="highlight-content">
+                            <h4>Lokaal = geen garantie</h4>
+                            <p>Selecta (Rotterdam) won een project in Uden. Geografische nabijheid beschermt niet.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-number">03</span>
+                        <div class="highlight-content">
+                            <h4>Hoogbouw als niche</h4>
+                            <p>Complexe retrofit-appartementen worden vermeden door massaproducenten.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="quote-block">
+                        <p>"Van Uden opereert nationaal als onderaannemer voor Circet en Solutions30. De vraag voor Duitsland: blijf je onderaannemer, of ga je direct contracteren?"</p>
+                    </div>
+                    <a href="VU-Telecom-Marktonderzoek-NL.pdf" class="download-btn" download>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                        Download Marktonderzoek NL
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Duitse Markt -->
+    <section class="section-white alt" id="markt-de">
+        <div class="section-container">
+            <div class="section-label">03 — Expansie</div>
+            <h2 class="section-title">De Duitse <em>kans</em></h2>
+            <p class="section-subtitle">Sparkwire is het Duitse label. Maar wat is de kans? En wat zijn de valkuilen?</p>
+
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-number">27%</div>
+                    <div class="stat-label">Homes Activated</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">53%</div>
+                    <div class="stat-label">Homes Passed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">17M+</div>
+                    <div class="stat-label">Woningen wachten</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">€MRD</div>
+                    <div class="stat-label">Vastzittend kapitaal</div>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <div class="highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-number">01</span>
+                        <div class="highlight-content">
+                            <h4>De "Activatie Kloof"</h4>
+                            <p>Kabel ligt in de straat (53%), maar slechts 27% heeft werkend internet. Die gap is de kans.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-number">02</span>
+                        <div class="highlight-content">
+                            <h4>Soka-Bau valkuil</h4>
+                            <p>15,20% van brutoloon naar vakantiefonds. Niet registreren = boetes. Kritiek voor Dag 1.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-number">03</span>
+                        <div class="highlight-content">
+                            <h4>Stadtwerke = ideale klant</h4>
+                            <p>Lokale nutsbedrijven waarderen kwaliteit boven laagste prijs. Lager risico.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="quote-block">
+                        <p>"Vermijd commodity-concurrentie met Circet en SPIE. Focus op NE4-activatie: het 'laatste stuk' waar grote aannemers stoppen."</p>
+                    </div>
+                    <a href="VU-Telecom-Marktonderzoek-DE-Sparkwire.pdf" class="download-btn" download>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                        Download Marktonderzoek DE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Sparkwire Website -->
+    <section class="section-red" id="sparkwire">
+        <div class="section-container">
+            <div class="two-col-wide">
+                <div>
+                    <div class="section-label">04 — Concept</div>
+                    <h2 class="section-title">Sparkwire <em>Netzbau</em></h2>
+                    <p class="section-subtitle">Op basis van de brand guidelines en het marktonderzoek: een voorzet voor de Duitse website.</p>
+                    
+                    <div class="highlights">
+                        <div class="highlight-item">
+                            <span class="highlight-number">01</span>
+                            <div class="highlight-content">
+                                <h4>Brand guidelines gevolgd</h4>
+                                <p>Royal Orange, Navy Blue, Montserrat + Roboto. Energiek maar betrouwbaar.</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-number">02</span>
+                            <div class="highlight-content">
+                                <h4>Positionering op NE4</h4>
+                                <p>"Van de straat tot de woning" — waar grote aannemers stoppen.</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-number">03</span>
+                            <div class="highlight-content">
+                                <h4>Compliance voorop</h4>
+                                <p>Soka-Bau, Handwerkskammer, VCA** prominent voor Duitse opdrachtgevers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div></div>
+            </div>
+
+            <div class="preview-wrapper">
+                <div class="preview-label" style="color: var(--white); opacity: 0.6;">Website concept</div>
+                <div class="preview-container">
+                    <div class="preview-header">
+                        <div class="preview-dot red"></div>
+                        <div class="preview-dot yellow"></div>
+                        <div class="preview-dot green"></div>
+                        <span class="preview-url">sparkwire-netzbau.de (concept)</span>
+                    </div>
+                    <iframe src="sparkwire-netzbau.html" class="preview-iframe" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: AI Opportunities -->
+    <section class="section-white" id="ai">
+        <div class="section-container">
+            <div class="section-label">05 — Bonus</div>
+            <h2 class="section-title">AI-kansen <em>voor Van Uden</em></h2>
+            <p class="section-subtitle">Niet gevraagd, maar wel interessant. Thought starters, geen verkooppraatjes.</p>
+
+            <div class="two-col" style="margin-top: 64px;">
+                <div class="highlights">
+                    <div class="highlight-item">
+                        <span class="highlight-number">01</span>
+                        <div class="highlight-content">
+                            <h4>Foto-validatie</h4>
+                            <p>AI die automatisch controleert of werkfoto's compleet zijn. Minder heen-en-weer.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-number">02</span>
+                        <div class="highlight-content">
+                            <h4>Slimme planning</h4>
+                            <p>Route-optimalisatie en capaciteitsplanning. Minder kilometers, meer aansluitingen.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-number">03</span>
+                        <div class="highlight-content">
+                            <h4>24/7 intake</h4>
+                            <p>AI-chatbot voor eerste storingsmeldingen. Voorsorteren, basisinfo verzamelen.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="quote-block">
+                        <p>"Concrete implementatie vereist gesprekken over huidige processen, systemen en prioriteiten. Dit zijn startpunten, geen eindoplossingen."</p>
+                    </div>
+                    <a href="VU-Telecom-AI-Kansen.pdf" class="download-btn" download>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                        Download AI-Kansen
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="closing">
+        <h2>Dat was het.</h2>
+        <p>Geen pitch. Geen offerte. Gewoon nieuwsgierigheid die uit de hand liep. Doe ermee wat je wilt — of niets. Ik vond het leuk om te maken.</p>
+        <div class="signature">— Bas</div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">Red About Now</div>
+        <div class="footer-info">
+            <a href="https://www.redaboutnow.com">www.redaboutnow.com</a>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        const sections = document.querySelectorAll('section');
+        
+        function updateNav() {
+            const scrollPos = window.scrollY + 100;
+            
+            // Check which section we're in
+            let currentSection = null;
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                if (scrollPos >= top && scrollPos < bottom) {
+                    currentSection = section;
+                }
+            });
+
+            // Update nav style based on section background
+            if (currentSection) {
+                if (currentSection.classList.contains('section-white') || 
+                    currentSection.classList.contains('closing')) {
+                    navbar.classList.add('on-white');
+                } else {
+                    navbar.classList.remove('on-white');
+                }
+            }
+
+            // Add scrolled class
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+
+        window.addEventListener('scroll', updateNav);
+        updateNav();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
